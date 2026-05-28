@@ -2,8 +2,9 @@ import { useState,useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
-  const [email,    setEmail]    = useState("")
-  const [password, setPassword] = useState("")
+  const [email,    setEmail]    = useState("");
+  const [password, setPassword] = useState("");
+  const [message,setMessage]=useState("");
   const navigate = useNavigate()
 
    useEffect(() => {
@@ -20,9 +21,12 @@ const Login = () => {
       body:    JSON.stringify({ email, password })
     })
     const data = await res.json()
+    
     if (data.success) {
       localStorage.setItem("user_id", data.user.id)
       navigate("/home")
+    }else{
+      setMessage(data.message);
     }
   }
 
@@ -55,6 +59,7 @@ const Login = () => {
             onChange={e => setPassword(e.target.value)}
           />
         </div>
+        {message}
 
         <button type="submit">Login</button>
       </form>
