@@ -10,7 +10,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/signup", {
+      const res = await fetch("https://notes-backend-abc.onrender.com/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
