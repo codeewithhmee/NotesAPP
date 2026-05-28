@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../loading"
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const SignUp = () => {
 
   const [eyeclose, setEyeclose] = useState(true);
   const [passType, setPasstype] = useState("password");
+
+  const[loading,setLoading]=useState(false)
 
   function changeEye() {
     if (eyeclose) {
@@ -22,6 +25,7 @@ const SignUp = () => {
   }
 
   const handleSignUp = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     try {
@@ -46,6 +50,7 @@ const SignUp = () => {
     } catch (err) {
       setMessage("Server error. Try again.");
     }
+    setLoading(false)
   };
 
   return (
@@ -85,8 +90,8 @@ const SignUp = () => {
         <button style={styles.button} type="submit">
           Sign Up
         </button>
-
-        {message && <p style={styles.message}>{message}</p>}
+        {loading && <Loading/>}
+        {!loading && message && <p style={styles.message}>{message}</p>}
 
         <div style={styles.bottomText}>
           Already have an account?
