@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const SignUp = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const[eyeclose,setEyeclose]=useState(true);
-  const[passType,setPasstype]=useState("password");
 
-  
-  function changeEye(){
-    if(eyeclose){
+  const [eyeclose, setEyeclose] = useState(true);
+  const [passType, setPasstype] = useState("password");
+
+  function changeEye() {
+    if (eyeclose) {
       setEyeclose(false);
-      setPasstype("text")
-    }else{
+      setPasstype("text");
+    } else {
       setEyeclose(true);
-      setPasstype("password")
-
+      setPasstype("password");
     }
   }
 
@@ -24,13 +25,16 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://note-backend-b56h.onrender.com/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        "https://note-backend-b56h.onrender.com/api/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       const data = await res.json();
 
@@ -44,71 +48,96 @@ const SignUp = () => {
     }
   };
 
- return (
-  <div style={styles.container}>
-    <form onSubmit={handleSignUp} style={styles.form}>
-      <h2 style={styles.title}>Create Account</h2>
-      <p style={styles.subtitle}>Join us and start your journey today</p>
+  return (
+    <div style={styles.container}>
+      <form onSubmit={handleSignUp} style={styles.form}>
+        <h2 style={styles.title}>Create Account</h2>
 
-      <input
-        style={styles.input}
-        type="email"
-        placeholder="name@example.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <p style={styles.subtitle}>
+          Join us and start your journey today
+        </p>
 
-        <div className="pass_bar">
-              <input
-                type={passType}
-                placeholder="Enter your password..."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <img onClick={changeEye} src={eyeclose?"../image.png":"../visible.png"} alt="" className="eye_close" />
+        <input
+          style={styles.input}
+          type="email"
+          placeholder="name@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-            </div>
+        <div style={styles.eye}>
+          <input
+            style={styles.input}
+            type={passType}
+            placeholder="Enter your password..."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-      <button style={styles.button} type="submit">
-        Sign Up
-      </button>
+          <img
+            onClick={changeEye}
+            src={eyeclose ? "/image.png" : "/visible.png"}
+            alt=""
+            style={styles.eyeIcon}
+          />
+        </div>
 
-      {message && <p style={styles.message}>{message}</p>}
-
-      <div style={styles.bottomText}>
-        Already have an account?
-        <button
-          type="button"
-          style={styles.loginButton}
-          onClick={() => navigate("/login")}
-        >
-          Login
+        <button style={styles.button} type="submit">
+          Sign Up
         </button>
-      </div>
-    </form>
-  </div>
-);
+
+        {message && <p style={styles.message}>{message}</p>}
+
+        <div style={styles.bottomText}>
+          Already have an account?
+          <button
+            type="button"
+            style={styles.loginButton}
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 const styles = {
+  eye: {
+    position: "relative",
+  },
+
+  eyeIcon: {
+    position: "absolute",
+    right: "12px",
+    top: "35%",
+    transform: "translateY(-50%)",
+    width: "20px",
+    cursor: "pointer",
+  },
+
   container: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     minHeight: "100vh",
-    backgroundColor: "#f9fafb", 
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    backgroundColor: "#f9fafb",
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     padding: "20px",
   },
+
   form: {
     backgroundColor: "#ffffff",
     padding: "40px",
     borderRadius: "12px",
     width: "100%",
     maxWidth: "380px",
-    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.02)", 
+    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.02)",
     border: "1px solid #f0f0f0",
   },
+
   title: {
     margin: "0 0 6px 0",
     fontSize: "22px",
@@ -116,12 +145,14 @@ const styles = {
     color: "#111111",
     textAlign: "center",
   },
+
   subtitle: {
     margin: "0 0 28px 0",
     fontSize: "13px",
     color: "#707070",
     textAlign: "center",
   },
+
   input: {
     width: "100%",
     padding: "12px 14px",
@@ -133,30 +164,34 @@ const styles = {
     boxSizing: "border-box",
     outline: "none",
   },
+
   button: {
     width: "100%",
     padding: "12px",
     fontSize: "14px",
     fontWeight: "500",
     color: "#ffffff",
-    backgroundColor: "#3b82f6", 
+    backgroundColor: "#3b82f6",
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
     marginTop: "8px",
   },
+
   message: {
     marginTop: "12px",
     fontSize: "13px",
     color: "#023f85",
     textAlign: "center",
   },
+
   bottomText: {
     marginTop: "24px",
     fontSize: "13px",
     color: "#000000",
     textAlign: "center",
   },
+
   loginButton: {
     background: "none",
     border: "none",
@@ -168,7 +203,5 @@ const styles = {
     textDecoration: "underline",
   },
 };
-
-
 
 export default SignUp;
