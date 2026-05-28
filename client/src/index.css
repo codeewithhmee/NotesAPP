@@ -356,3 +356,24 @@ p span:hover {
   display: flex;
   align-items: center;
 }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #444;
+  border-top: 2px solid #00d9ff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
