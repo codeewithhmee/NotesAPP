@@ -11,7 +11,7 @@ const Home = () => {
     const updatedNotes = notes.filter(note => note._id !== e._id);
     console.log(updatedNotes)
     setNotes(updatedNotes);
-      const res  = await fetch("http://localhost:5000/api/deleteNote", {
+      const res  = await fetch("https://note-backend-b56h.onrender.com/api/deleteNote", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify({ e })
@@ -33,7 +33,7 @@ const fetchNotes = async () => {
   if (!userId) return; 
 
   try {
-    const res  = await fetch(`http://localhost:5000/api/getNotes/${userId}`);
+    const res  = await fetch(`https://note-backend-b56h.onrender.com/api/getNotes/${userId}`);
     const data = await res.json();
     setNotes(data);
     console.log(data);
@@ -48,7 +48,7 @@ useEffect(() => {
   //  Save Note 
   const saveNote = async () => {
     const userId = localStorage.getItem("user_id");
-    await fetch("http://localhost:5000/api/addNote", {
+    await fetch("https://note-backend-b56h.onrender.com/api/addNote", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify({ title, content, author: userId }),
