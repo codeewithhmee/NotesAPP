@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../loading"
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +10,8 @@ const Login = () => {
   const navigate = useNavigate();
   const[eyeclose,setEyeclose]=useState(true);
   const[passType,setPasstype]=useState("password");
+    const[loading,setLoading]=useState(false)
+  
 
 
   function changeEye(){
@@ -29,6 +33,8 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const res = await fetch(
       "https://note-backend-b56h.onrender.com/api/login",
       {
@@ -45,6 +51,7 @@ const Login = () => {
     } else {
       setMessage(data.message);
       console.log("dsds", data);
+      setLoading(false)
     }
   };
 
@@ -80,7 +87,8 @@ const Login = () => {
 
             </div>
           </div>
-          {message}
+            {loading && <Loading/>}
+          {!loading && message}
 
           <button type="submit">Login</button>
         </form>
