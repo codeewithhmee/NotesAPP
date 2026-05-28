@@ -197,15 +197,21 @@ body {
 
 .noteCard {
   background: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.01);
+  border-radius: 16px;
+  padding: 18px;
+  width: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 180px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  border: 1px solid #e5e7eb;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.03),
+    0 1px 3px rgba(0,0,0,0.02);
+
+  transition: all 0.2s ease;
+
+  overflow: hidden;
+  position: relative;
 }
 
 .noteCard:hover {
@@ -214,35 +220,62 @@ body {
 }
 
 .noteTitle {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-size: 17px;
+  font-weight: 700;
   color: #111827;
+  margin-bottom: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .noteContent {
+  flex: 1;
+
+  font-size: 14px;
+  line-height: 1.7;
   color: #4b5563;
-  font-size: 13px;
-  line-height: 1.5;
+
+  overflow-y: auto;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+
+  padding-right: 4px;
+
   margin-bottom: 16px;
-  flex-grow: 1;
+}
+.noteContent::-webkit-scrollbar {
+  width: 4px;
 }
 
+.noteContent::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
 .deleteBtn {
-  background: none;
+  margin-top: auto;
+
   border: none;
-  color: #ef4444; 
+  background: #ef4444;
+  color: white;
+
+  padding: 10px 14px;
+  border-radius: 10px;
+
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
+
   cursor: pointer;
-  padding: 0;
-  width: fit-content;
-  transition: color 0.2s ease;
+
+  transition: all 0.2s ease;
 }
 
 .deleteBtn:hover {
-  color: #dc2626;
-  text-decoration: underline;
+  background: #dc2626;
+  transform: scale(1.02);
 }
 
 .login-wrapper {
