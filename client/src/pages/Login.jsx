@@ -15,7 +15,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    const res  = await fetch("http://localhost:5000/api/login", {
+    const res  = await fetch("https://note-backend-b56h.onrender.com/api/login", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify({ email, password })
@@ -27,6 +27,7 @@ const Login = () => {
       navigate("/home")
     }else{
       setMessage(data.message);
+      console.log("dsds",data)
     }
   }
 
@@ -54,7 +55,7 @@ const Login = () => {
           <label>Password</label>
           <input
             type="password"
-            placeholder="••••••••"
+            placeholder="Enter password..."
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
