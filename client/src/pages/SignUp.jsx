@@ -5,6 +5,20 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const[eyeclose,setEyeclose]=useState(true);
+  const[passType,setPasstype]=useState("password");
+
+  
+  function changeEye(){
+    if(eyeclose){
+      setEyeclose(false);
+      setPasstype("text")
+    }else{
+      setEyeclose(true);
+      setPasstype("password")
+
+    }
+  }
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -44,13 +58,16 @@ const SignUp = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <input
-        style={styles.input}
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <div className="pass_bar">
+              <input
+                type={passType}
+                placeholder="Enter your password..."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <img onClick={changeEye} src={eyeclose?"../image.png":"../visible.png"} alt="" className="eye_close" />
+
+            </div>
 
       <button style={styles.button} type="submit">
         Sign Up
