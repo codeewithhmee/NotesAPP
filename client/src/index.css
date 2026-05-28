@@ -346,3 +346,13 @@ p span {
 p span:hover {
   color: #232d3f;
 }
+.eye_close{
+  width: 20px;
+  height: 25px;
+  position: relative;
+  right: 30px;
+}
+.pass_bar{
+  display: flex;
+  align-items: center;
+}
